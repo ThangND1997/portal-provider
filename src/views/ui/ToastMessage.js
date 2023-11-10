@@ -4,8 +4,9 @@ import Snackbar from '@mui/material/Snackbar';
 import { useState, useEffect } from 'react';
 import { Stack } from '@mui/material';
 import { MAPPING_TOAST } from '../../utils/Constant';
+import { memo } from "react";
 
-export default function ToastMessage(props) {
+const ToastMessage = (props) => {
   let [status, value] = ["error", "not found."]
   const mapToast = MAPPING_TOAST[props.data.key];
   if (mapToast && mapToast.length > 0) {
@@ -27,7 +28,6 @@ export default function ToastMessage(props) {
     // Set state
     setIsOpen(props.data.isOpen)
   },[props])
-
   return (
     <Stack sx={{ zIndex: 9999, position: 'fixed', right: 0 }}>
       <Snackbar sx={{position: 'unset'}} open={isOpen} onClose={handleClose} autoHideDuration={2000} >
@@ -36,3 +36,5 @@ export default function ToastMessage(props) {
     </Stack>
   );
 }
+
+export default memo(ToastMessage)

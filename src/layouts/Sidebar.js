@@ -24,8 +24,8 @@ const navigation = [
     icon: "bi bi-hdd-stack",
   },
   {
-    title: "Cards",
-    href: "/cards",
+    title: "Sản phẩm",
+    href: "/products",
     icon: "bi bi-card-text",
   },
   {
@@ -42,16 +42,6 @@ const navigation = [
     title: "Đăng kí thành viên",
     href: "/forms",
     icon: "bi bi-textarea-resize",
-  },
-  {
-    title: "Breadcrumbs",
-    href: "/breadcrumbs",
-    icon: "bi bi-link",
-  },
-  {
-    title: "About",
-    href: "/about",
-    icon: "bi bi-people",
   },
 ];
 
@@ -91,15 +81,6 @@ const Sidebar = () => {
               </Link>
             </NavItem>
           ))}
-          <Button
-            color="danger"
-            tag="a"
-            target="_blank"
-            className="mt-3"
-            href="https://www.wrappixel.com/templates/ample-react-dashboard/?ref=33"
-          >
-            Upgrade To Pro
-          </Button>
         </Nav>
       </div>
     </div>

@@ -7,7 +7,6 @@ const FullLayout = lazy(() => import("../layouts/FullLayout.js"));
 /***** Pages ****/
 
 const Starter = lazy(() => import("../views/Starter.js"));
-const About = lazy(() => import("../views/About.js"));
 const Alerts = lazy(() => import("../views/ui/Alerts"));
 const Badges = lazy(() => import("../views/ui/Badges"));
 const Buttons = lazy(() => import("../views/ui/Buttons"));
@@ -25,17 +24,16 @@ const ThemeRoutes = (modalFunc, toastFunc) => {
       path: "/",
       element: <FullLayout />,
       children: [
-        { path: "/", element: <Navigate to="/starter" /> },
-        { path: "/starter", exact: true, element: <Starter data={{modalFunc, toastFunc}}/> },
-        { path: "/about", exact: true, element: <About /> },
-        { path: "/alerts", exact: true, element: <Alerts /> },
-        { path: "/badges", exact: true, element: <Badges /> },
-        { path: "/buttons", exact: true, element: <Buttons /> },
-        { path: "/cards", exact: true, element: <Cards /> },
-        { path: "/grid", exact: true, element: <Grid /> },
-        { path: "/table", exact: true, element: <Tables data={{modalFunc, toastFunc}}/> },
-        { path: "/forms", exact: true, element: <Forms data={{modalFunc, toastFunc}}/> },
-        { path: "/breadcrumbs", exact: true, element: <Breadcrumbs /> },
+        { path: "/", element: <Navigate to="/products" /> },
+        { path: "/revenue", element: <Starter data={{modalFunc, toastFunc}}/> },
+        { path: "/alerts", element: <Alerts /> },
+        { path: "/badges", element: <Badges /> },
+        { path: "/buttons", element: <Buttons /> },
+        { path: "/products", element: <Cards data={{modalFunc, toastFunc}}/> },
+        { path: "/grid", element: <Grid /> },
+        { path: "/management", element: <Tables data={{modalFunc, toastFunc}}/> },
+        { path: "/employee-register", element: <Forms data={{modalFunc, toastFunc}}/> },
+        { path: "/breadcrumbs", element: <Breadcrumbs /> },
       ],
     },
   ];

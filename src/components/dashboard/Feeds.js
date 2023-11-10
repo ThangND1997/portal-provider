@@ -54,33 +54,35 @@ const FeedData = [
   },
 ];
 
-const Feeds = () => {
+const Feeds = (props) => {
+  if (Object.keys(props.data).length < 1) {
+    return (<></>);
+  }
   return (
     <Card>
       <CardBody>
-        <CardTitle tag="h5">Feeds</CardTitle>
+        <CardTitle tag="h5">Doanh thu theo ngày</CardTitle>
         <CardSubtitle className="mb-2 text-muted" tag="h6">
-          Widget you can use
+          Tổng doanh thu: {Number(props.data.totalPriceCharge + "000").toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}
         </CardSubtitle>
         <ListGroup flush className="mt-4">
-          {FeedData.map((feed, index) => (
+          {props.data.detailPriceCharge.map((feed, index) => (
             <ListGroupItem
               key={index}
               action
-              href="/"
               tag="a"
               className="d-flex align-items-center p-3 border-0"
             >
               <Button
                 className="rounded-circle me-3"
                 size="sm"
-                color={feed.color}
+                color="primary"
               >
-                <i className={feed.icon}></i>
+                <i className="bi bi-hdd"></i>
               </Button>
               {feed.title}
               <small className="ms-auto text-muted text-small">
-                {feed.date}
+                {Number(feed.fee + "000").toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}
               </small>
             </ListGroupItem>
           ))}

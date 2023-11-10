@@ -5,7 +5,6 @@ import axios from "axios";
 import Button from '@mui/material/Button';
 
 const ProjectTables = (load) => {
-  console.log(load);
   const [reloadUsers, setReloadUsers] = useState(false);
   const [users, setUsers] = useState([]);
   useEffect(() => {
@@ -23,7 +22,6 @@ const ProjectTables = (load) => {
         load.projectTables.data.modalFunc(false);
       })
       .catch((er) => {
-        console.log(er);
         load.projectTables.data.modalFunc(false);
       })
   }, [reloadUsers])

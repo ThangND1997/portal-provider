@@ -22,7 +22,9 @@ const App = () => {
     <>
       <ToastMessage data={open}/>
       <LoadingPage isLoad={isLoading}/>
-      <div className="dark">{routing}</div>
+      <div className="dark">
+        {routing}
+      </div>
     </>
   )
 };

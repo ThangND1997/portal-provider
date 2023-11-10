@@ -13,10 +13,10 @@ export default function LoadingPage(props) {
       justifyContent: 'center', 
       alignItems: 'center', 
       backgroundColor: 'rgba(0,0,0,0.6)',
-      position: 'absolute',
+      position: 'fixed',
       zIndex: 1,
       width:'100%',
-      height:'100%',
+      height:'100vh',
       // backgroundColor: 'rgba(0,0,0,0.3)'
       }}>
       <CircularProgress />

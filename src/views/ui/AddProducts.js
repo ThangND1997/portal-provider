@@ -9,13 +9,14 @@ import {
   FormGroup,
   Label,
   Input,
+  CardSubtitle,
 } from "reactstrap";
 import { useState } from "react";
 import axios from "axios";
 import { HOST_PRIMARY, TOAST_KEY } from "../../utils/Constant";
 
 
-const Forms = (load) => {
+const AddProducts = (load) => {
   const validDefault = {email: true, password: true, avatarUrl: true, name: true, phoneNumber: true}
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -118,12 +119,12 @@ const Forms = (load) => {
         {/* Card-1*/}
         {/* --------------------------------------------------------------------------------*/}
         <Card>
-          <CardTitle tag="h6" className="border-bottom p-3 mb-0">
-            <i className="bi bi-bell me-2"> </i>
-            Đăng kí thành viên
-          </CardTitle>
           <CardBody>
-            <Form onSubmit={handleSubmit}>
+            <CardTitle tag="h5">Thêm sản phẩm mới</CardTitle>
+            <CardSubtitle className="mb-2 text-muted" tag="h6">
+              Nhập thông tin sản phẩm
+            </CardSubtitle>
+            <Form className="no-wrap mt-3 align-middle" onSubmit={handleSubmit}>
               <FormGroup>
                 <Label for="exampleEmail">Email</Label>
                 <Input
@@ -180,15 +181,15 @@ const Forms = (load) => {
               </FormGroup>
               <FormGroup>
                 <Label for="exampleFile">Avatar</Label>
-                <Input 
-                  id="exampleFile" 
-                  name="file" 
+                <Input
+                  id="exampleFile"
+                  name="file"
                   type="file"
                   invalid={valid.avatarUrl ? false : true}
                   onChange={(e) => fetchAvatarUrl(e)}
                 />
               </FormGroup>
-              
+
               <Button className="mt-2" type="submit" color="primary">Submit</Button>
             </Form>
           </CardBody>
@@ -198,4 +199,4 @@ const Forms = (load) => {
   );
 };
 
-export default Forms;
+export default AddProducts;
