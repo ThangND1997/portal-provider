@@ -2,35 +2,30 @@ import React from "react";
 import { Link } from "react-router-dom";
 import {
   Navbar,
-  Collapse,
   Nav,
   NavItem,
-  NavbarBrand,
-  UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
   Dropdown,
-  Button,
 } from "reactstrap";
-import { ReactComponent as LogoWhite } from "../assets/images/logos/swimming.svg";
 import user1 from "../assets/images/users/user1.jpg";
 
 const Header = () => {
-  const [isOpen, setIsOpen] = React.useState(false);
+  // const [isOpen, setIsOpen] = React.useState(false);
   const [dropdownOpen, setDropdownOpen] = React.useState(false);
 
   const toggle = () => setDropdownOpen((prevState) => !prevState);
-  const Handletoggle = () => {
-    setIsOpen(!isOpen);
-  };
-  const showMobilemenu = () => {
-    document.getElementById("sidebarArea").classList.toggle("showSidebar");
-  };
+  // const Handletoggle = () => {
+  //   setIsOpen(!isOpen);
+  // };
+  // const showMobilemenu = () => {
+  //   document.getElementById("sidebarArea").classList.toggle("showSidebar");
+  // };
   return (
-    <Navbar color="dark" dark expand="md">
+    <Navbar color="dark" dark expand="md" style={{ display: "flex", flexWrap: "nowrap", flexDirection: "row" }}>
       <div className="hstack gap-2">
-        <Button
+        {/* <Button
           color="dark"
           size="sm"
           className="d-sm-block d-md-none"
@@ -41,33 +36,33 @@ const Header = () => {
           ) : (
             <i class="bi bi-houses"> Danh mục</i>
           )}
-        </Button>
+        </Button> */}
       </div>
 
-      <Collapse expand="sm" navbar isOpen={isOpen}>
-        <Nav className="me-auto" navbar>
+      <div expand="lg" navbar>
+        <Nav className="me-auto" navbar style={{ display: "flex", flexWrap: "nowrap", flexDirection: "row" }}>
             <NavItem>
-              <Link to="/revenue" className="nav-link">
+              <Link to="/revenue" className="nav-link" style={{ margin: "0 10px" }}>
                 Doanh Thu
               </Link>
             </NavItem>
             <NavItem>
-              <Link to="/products" className="nav-link">
+              <Link to="/products" className="nav-link" style={{ margin: "0 10px" }}>
                 Sản phẩm
               </Link>
             </NavItem>
             <NavItem>
-              <Link to="/management" className="nav-link">
+              <Link to="/management" className="nav-link" style={{ margin: "0 10px" }}>
                 Quản lý
               </Link>
             </NavItem>
             <NavItem>
-              <Link to="/employee-register" className="nav-link">
+              <Link to="/employee-register" className="nav-link" style={{ margin: "0 10px" }}>
                 Đăng ký thành viên
               </Link>
             </NavItem>
           </Nav>
-      </Collapse>
+      </div>
       <Dropdown isOpen={dropdownOpen} toggle={toggle}>
         <DropdownToggle color="dark">
           <img
