@@ -22,8 +22,8 @@ const Blog = (props) => {
       </div>
       <CardBody onClick={handlePopupItemFunc} className="p-4" style={{ borderBottomRightRadius: "8px", borderBottomLeftRadius: "8px", userSelect: "none", cursor: "pointer" }}>
         <CardTitle tag="h5">{props.title}</CardTitle>
-        <CardSubtitle>
-          <span style={{ textOverflow: "ellipsis", width: "20px" }}>{props.subtitle}</span>
+        <CardSubtitle style={{ textOverflow: "ellipsis", overflow: "hidden", textWrap: "nowrap" }}>
+          <span>{props.subtitle}</span>
         </CardSubtitle>
         <CardText style={{ color: '#e13f8f' }} className="mt-3">Giá: {props.priceDisplay ? Number(props.priceDisplay + "000").toLocaleString('it-IT', {style : 'currency', currency : 'VND'}) : "0 VND"}</CardText>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>

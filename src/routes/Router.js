@@ -18,7 +18,7 @@ const Breadcrumbs = lazy(() => import("../views/ui/Breadcrumbs"));
 
 /*****Routes******/
 
-const ThemeRoutes = (modalFunc, toastFunc) => {
+const ThemeRoutes = (modalFunc, toastFunc, popupsFunc) => {
   return [
     {
       path: "/",
@@ -31,7 +31,7 @@ const ThemeRoutes = (modalFunc, toastFunc) => {
         { path: "/buttons", element: <Buttons /> },
         { path: "/products", element: <Cards data={{modalFunc, toastFunc}}/> },
         { path: "/grid", element: <Grid /> },
-        { path: "/management", element: <Tables data={{modalFunc, toastFunc}}/> },
+        { path: "/management", element: <Tables data={{modalFunc, toastFunc, popupsFunc}}/> },
         { path: "/employee-register", element: <Forms data={{modalFunc, toastFunc}}/> },
         { path: "/breadcrumbs", element: <Breadcrumbs /> },
       ],

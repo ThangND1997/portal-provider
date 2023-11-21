@@ -16,6 +16,7 @@ import { HOST_PRIMARY, TOAST_KEY } from "../../utils/Constant";
 
 
 const Forms = (load) => {
+  console.log(load);
   const validDefault = {email: true, password: true, avatarUrl: true, name: true, phoneNumber: true}
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -68,31 +69,37 @@ const Forms = (load) => {
         data
       })
         .then(res => {
-          load.data.modalFunc(false);
-          load.data.toastFunc({
+          load.forms.modalFunc(false);
+          load.forms.toastFunc({
             isOpen: true,
             key: TOAST_KEY.SUCCESS,
             customMessage: {
               value: "Đăng kí thành công!"
             }
           });
+          load.forms.popupsFunc({
+            isShow: false,
+          })
         })
         .catch((er) => {
-          load.data.modalFunc(false);
-          load.data.toastFunc({
+          load.forms.modalFunc(false);
+          load.forms.toastFunc({
             isOpen: true,
             key: TOAST_KEY.ERROR,
             customMessage: {
               value: er.response.data.message
             }
           });
+          load.forms.popupsFunc({
+            isShow: false,
+          })
         })
     }
   }
 
   const fetchAvatarUrl = async(e) => {
     //call loading
-    load.data.modalFunc(true);
+    load.forms.modalFunc(true);
     const formData = new FormData()
     formData.append("image", e.target.files[0])
     await axios({
@@ -105,10 +112,10 @@ const Forms = (load) => {
     })
     .then(res => {
         setAvatar(res.data.data.link)
-        load.data.modalFunc(false);
+        load.forms.modalFunc(false);
     })
     .catch((er) => {
-        load.data.modalFunc(false);
+        load.forms.modalFunc(false);
     })
   }
   return (

@@ -11,9 +11,9 @@ const Tables = (load) => {
       <Col lg="12">
         <ProjectTables projectTables={load}/>
       </Col>
-      {/* <Col>
+      <Col>
         <AddProducts addProducts={load}/>
-      </Col> */}
+      </Col>
     </Row>
   );
 };

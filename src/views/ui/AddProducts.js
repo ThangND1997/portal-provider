@@ -1,201 +1,140 @@
-import {
-  Card,
-  Row,
-  Col,
-  CardTitle,
-  CardBody,
-  Button,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  CardSubtitle,
-} from "reactstrap";
-import { useState } from "react";
-import axios from "axios";
+import { Card, CardBody, CardTitle, CardSubtitle, Table } from "reactstrap";
+import { useEffect, useState } from "react";
 import { HOST_PRIMARY, TOAST_KEY } from "../../utils/Constant";
-
+import axios from "axios";
+import Button from '@mui/material/Button';
+import PostAddOutlinedIcon from '@mui/icons-material/PostAddOutlined';
+import CreateProducts from "../ui/CreateProducts"
 
 const AddProducts = (load) => {
-  const validDefault = {email: true, password: true, avatarUrl: true, name: true, phoneNumber: true}
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [name, setName] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [avatar, setAvatar] = useState("");
-  const [valid, setValid] = useState(validDefault);
+  const modalFunc = load.addProducts.data.modalFunc;
+  const toastFunc = load.addProducts.data.toastFunc;
+  const popupsFunc = load.addProducts.data.popupsFunc;
+  const [reloadProducts, setReloadProducts] = useState(false);
 
-  const handleSubmit = async (event) => {
-    const ds = {email: true, password: true, avatarUrl: true, name: true, phoneNumber: true}
-    event.preventDefault();
-    let isValidate = false;
-    if (!email) {
-      ds.email = false;
-      isValidate = true;
-    }
-    if (!password) {
-      ds.password = false;
-      isValidate = true;
-    }
-    if (!avatar) {
-      ds.avatarUrl = false;
-      isValidate = true;
-    }
-    if (!name) {
-      ds.name = false;
-      isValidate = true;
-    }
-    if (!phoneNumber) {
-      ds.phoneNumber = false;
-      isValidate = true;
-    }
-    // validate input
-    if (isValidate) {
-      setValid(ds)
-    } else {
-      const data = {
-        name,
-        email,
-        password,
-        avatarUrl: avatar,
-        phone: phoneNumber
-      }
-      await axios({
-        url: `${HOST_PRIMARY}/betiu-services/users/register`,
-        method: "POST",
-        headers: {
-          "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhYzdkMTFmMy1iODNiLTQzZDYtOWJkMS04NWY2Njc3ZTNiZmQiLCJyb2xlSWQiOiJhZG1pbiIsImlhdCI6MTY5ODAyODg4MCwiZXhwIjoxNzM0MDI4ODgwfQ.I4C7uDJpx64jucTuRBOaIRVVTrsiGPgiIt6FUJKYr44",
-        },
-        data
+  const editProductFunc = (id) => {
+    console.log(id);
+  }
+
+  const delProductFunc = (id) => {
+    load.addProducts.data.modalFunc(true);
+    axios({
+      url: `${HOST_PRIMARY}/betiu-services/products-warehouse/${id}`,
+      method: "DELETE",
+      headers: {
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhYzdkMTFmMy1iODNiLTQzZDYtOWJkMS04NWY2Njc3ZTNiZmQiLCJyb2xlSWQiOiJhZG1pbiIsImlhdCI6MTY5ODAyODg4MCwiZXhwIjoxNzM0MDI4ODgwfQ.I4C7uDJpx64jucTuRBOaIRVVTrsiGPgiIt6FUJKYr44",
+      },
+    })
+      .then(res => {
+        setReloadProducts(true);
+        load.addProducts.data.modalFunc(false);
+        load.addProducts.data.toastFunc({
+          isOpen: true,
+          key: TOAST_KEY.SUCCESS,
+        });
       })
-        .then(res => {
-          load.data.modalFunc(false);
-          load.data.toastFunc({
-            isOpen: true,
-            key: TOAST_KEY.SUCCESS,
-            customMessage: {
-              value: "Đăng kí thành công!"
-            }
-          });
-        })
-        .catch((er) => {
-          load.data.modalFunc(false);
-          load.data.toastFunc({
-            isOpen: true,
-            key: TOAST_KEY.ERROR,
-            customMessage: {
-              value: er.response.data.message
-            }
-          });
-        })
-    }
+      .catch((er) => {
+        load.addProducts.data.modalFunc(false);
+        load.addProducts.data.toastFunc({
+          isOpen: true,
+          key: TOAST_KEY.ERROR,
+          customMessage: {
+            value: er.response.data.message
+          }
+        });
+      })
   }
 
-  const fetchAvatarUrl = async(e) => {
-    //call loading
-    load.data.modalFunc(true);
-    const formData = new FormData()
-    formData.append("image", e.target.files[0])
-    await axios({
-        url: "https://api.imgur.com/3/image/",
-        method: "POST",
-        headers: {
-            "Authorization": "Client-ID eb9173f09f940b0",
-        },
-        data: formData
-    })
+  const addProductFunc = () => {
+    load.addProducts.data.popupsFunc({
+      isShow: true, 
+      soakData: <CreateProducts forms={{modalFunc, toastFunc, popupsFunc, setReloadProducts}}/>
+    });
+  }
+
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    setReloadProducts(false);
+    axios.get(`${HOST_PRIMARY}/betiu-services/products-warehouse`, {
+      params: { 
+        categoryId: "6da2b221-19b6-4b11-957c-a6ebf9a4c3e4"
+      },
+      headers: {"Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhYzdkMTFmMy1iODNiLTQzZDYtOWJkMS04NWY2Njc3ZTNiZmQiLCJyb2xlSWQiOiJhZG1pbiIsImlhdCI6MTY5ODAyODg4MCwiZXhwIjoxNzM0MDI4ODgwfQ.I4C7uDJpx64jucTuRBOaIRVVTrsiGPgiIt6FUJKYr44"}
+    },
+    )
     .then(res => {
-        setAvatar(res.data.data.link)
-        load.data.modalFunc(false);
+      setData(res.data)
     })
-    .catch((er) => {
-        load.data.modalFunc(false);
-    })
-  }
-  return (
-    <Row>
-      <Col>
-        {/* --------------------------------------------------------------------------------*/}
-        {/* Card-1*/}
-        {/* --------------------------------------------------------------------------------*/}
-        <Card>
-          <CardBody>
-            <CardTitle tag="h5">Thêm sản phẩm mới</CardTitle>
-            <CardSubtitle className="mb-2 text-muted" tag="h6">
-              Nhập thông tin sản phẩm
-            </CardSubtitle>
-            <Form className="no-wrap mt-3 align-middle" onSubmit={handleSubmit}>
-              <FormGroup>
-                <Label for="exampleEmail">Email</Label>
-                <Input
-                  id="exampleEmail"
-                  name="email"
-                  placeholder="Nhâp địa chỉ email"
-                  type="email"
-                  invalid={valid.email ? false : true}
-                  onClick={(e) => setValid(validDefault)}
-                  onChange={(e) => {
-                    setEmail(e.target.value)
-                  }}
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label for="examplePassword">Mật khẩu</Label>
-                <Input
-                  id="examplePassword"
-                  name="password"
-                  placeholder="Nhập mật khẩu"
-                  type="password"
-                  invalid={valid.password ? false : true}
-                  onClick={(e) => setValid(validDefault)}
-                  onChange={(e) => {
-                    setPassword(e.target.value)
-                  }}
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label for="examplePassword">Tên hiển thị</Label>
-                <Input
-                  id="examplePassword"
-                  placeholder="Nhập tên hiển thị"
-                  type="text"
-                  invalid={valid.password ? false : true}
-                  onClick={(e) => setValid(validDefault)}
-                  onChange={(e) => {
-                    setName(e.target.value)
-                  }}
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label for="examplePassword">Số điện thoại</Label>
-                <Input
-                  id="examplePassword"
-                  placeholder="Nhập số điện thoại"
-                  type="phone"
-                  invalid={valid.password ? false : true}
-                  onClick={(e) => setValid(validDefault)}
-                  onChange={(e) => {
-                    setPhoneNumber(e.target.value)
-                  }}
-                />
-              </FormGroup>
-              <FormGroup>
-                <Label for="exampleFile">Avatar</Label>
-                <Input
-                  id="exampleFile"
-                  name="file"
-                  type="file"
-                  invalid={valid.avatarUrl ? false : true}
-                  onChange={(e) => fetchAvatarUrl(e)}
-                />
-              </FormGroup>
+    .catch(err => console.log(err))
+  }, [reloadProducts])
 
-              <Button className="mt-2" type="submit" color="primary">Submit</Button>
-            </Form>
-          </CardBody>
-        </Card>
-      </Col>
-    </Row>
+  return (
+    <div>
+      <Card>
+        <CardBody>
+          <CardTitle tag="h5">
+            Quản lý sản phẩm
+            <Button style={{ marginLeft: 16 }} variant="outlined" color="primary" onClick={() => addProductFunc()}>
+              <PostAddOutlinedIcon />
+              <span style={{ marginLeft: "10px" }}>Thêm mới</span>
+              </Button>
+          </CardTitle>
+          <CardSubtitle className="mb-2 text-muted" tag="h6">
+            Danh sách sản phẩm
+          </CardSubtitle>
+
+          <Table className="no-wrap mt-3 align-middle" responsive borderless>
+            <thead>
+              <tr>
+                <th>Danh mục</th>
+
+                <th>Tên sản phẩm</th>
+
+                <th>Mô tả</th>
+
+                <th>Giá ban đầu</th>
+
+                <th>Giá bán</th>
+
+                <th>Hiển thị</th>
+
+                <th></th>
+
+              </tr>
+            </thead>
+            <tbody>
+              {data.map((item, index) => (
+                <tr key={index} className="border-top">
+                  <td>{item.category.name}</td>
+                  <td>{item.name}</td>
+                  <td style={{ textOverflow: "ellipsis", overflow: "hidden", maxWidth: "200px", textWrap: "nowrap" }}>
+                    <span title={item.description}>{item.description}</span>
+                  </td>
+                  <td>{item.priceOriginal ? Number(item.priceOriginal + "000").toLocaleString('it-IT', {style : 'currency', currency : 'VND'}) : "0 VND"}</td>
+                  <td>{item.priceDisplay ? Number(item.priceDisplay + "000").toLocaleString('it-IT', {style : 'currency', currency : 'VND'}) : "0 VND"}</td>
+                  <td>
+                    <img
+                        src={item.picture}
+                        // className="rounded-circle"
+                        alt="avatar"
+                        width="90"
+                        height="50"
+                        style={{ borderRadius: "6px", objectFit: "cover" }}
+                      />
+                  </td>
+                  <td>
+                      <Button variant="contained" color="success" onClick={() => editProductFunc(item.id)}>EDIT</Button>
+                  </td>
+                  <td>
+                      <Button variant="contained" color="error" onClick={() => delProductFunc(item.id)}>DEL</Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </Table>
+        </CardBody>
+      </Card>
+    </div>
   );
 };
 
