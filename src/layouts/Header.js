@@ -56,11 +56,11 @@ const Header = () => {
                 Quản lý
               </Link>
             </NavItem>
-            <NavItem>
+            {/* <NavItem>
               <Link to="/employee-register" className="nav-link" style={{ margin: "0 10px" }}>
                 Đăng ký thành viên
               </Link>
-            </NavItem>
+            </NavItem> */}
           </Nav>
       </div>
       <Dropdown isOpen={dropdownOpen} toggle={toggle}>

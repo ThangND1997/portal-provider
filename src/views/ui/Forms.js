@@ -64,7 +64,7 @@ const Forms = (load) => {
         url: `${HOST_PRIMARY}/betiu-services/users/register`,
         method: "POST",
         headers: {
-          "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhYzdkMTFmMy1iODNiLTQzZDYtOWJkMS04NWY2Njc3ZTNiZmQiLCJyb2xlSWQiOiJhZG1pbiIsImlhdCI6MTY5ODAyODg4MCwiZXhwIjoxNzM0MDI4ODgwfQ.I4C7uDJpx64jucTuRBOaIRVVTrsiGPgiIt6FUJKYr44",
+          "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhYzdkMTFmMy1iODNiLTQzZDYtOWJkMS04NWY2Njc3ZTNiZmQiLCJyb2xlSWQiOiJtYW5hZ2VyIiwiaWF0IjoxNzAwNjM0NTk5LCJleHAiOjE3MzY2MzQ1OTl9.0d4yf1J79SIT-nISpC-ETQWV6Zsuj848c1mSEiGm6YU",
         },
         data
       })
@@ -119,7 +119,7 @@ const Forms = (load) => {
     })
   }
   return (
-    <Row>
+    <Row style={{ minWidth: "60%" }}>
       <Col>
         {/* --------------------------------------------------------------------------------*/}
         {/* Card-1*/}
@@ -187,16 +187,30 @@ const Forms = (load) => {
               </FormGroup>
               <FormGroup>
                 <Label for="exampleFile">Avatar</Label>
-                <Input 
-                  id="exampleFile" 
-                  name="file" 
-                  type="file"
-                  invalid={valid.avatarUrl ? false : true}
-                  onChange={(e) => fetchAvatarUrl(e)}
+                {avatar ? <div style={{ position: "relative" }}>
+                  <img 
+                  src={avatar}
+                  // className="rounded-circle"
+                  alt="avatar"
+                  width="140"
+                  height="90"
+                  style={{ borderRadius: "6px", display: "flex", objectFit: "cover" }}
                 />
+                <i className="bi bi-x-circle me-2" style={{ position: "absolute", top: -12, left: 140, color: "red", cursor: "pointer", padding: "10px" }} onClick={() => setAvatar("")}></i>
+                </div>
+                : <Input 
+                id="avatarProduct" 
+                name="file" 
+                type="file"
+                invalid={valid.avatarUrl ? false : true}
+                onChange={(e) => fetchAvatarUrl(e)}
+              />}
               </FormGroup>
               
-              <Button className="mt-2" type="submit" color="primary">Submit</Button>
+              <div style={{ display: "flex", justifyContent: "flex-end", margin: 10 }}>
+                <Button className="mt-2" color="danger" style={{ marginRight: 16 }} onClick={() => load.forms.popupsFunc({isShow: false})}>Close</Button>
+                <Button className="mt-2" type="submit" color="primary">Submit</Button>
+              </div>
             </Form>
           </CardBody>
         </Card>

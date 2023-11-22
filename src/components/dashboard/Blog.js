@@ -8,10 +8,18 @@ import {
   Button,
 } from "reactstrap";
 import Skeleton from '@mui/material/Skeleton';
+import ReleaseProducts from "../../views/ui/ReleaseProducts";
 
 const Blog = (props) => {
+  const modalFunc = props.load.data.modalFunc;
+  const toastFunc = props.load.data.toastFunc;
+  const popupsFunc = props.load.data.popupsFunc;
+  const id = props.id;
   const handlePopupItemFunc = () => {
-    alert("Đang trong quá trình sử lý..")
+    props.load.data.popupsFunc({
+      isShow: true, 
+      soakData: <ReleaseProducts forms={{modalFunc, toastFunc, popupsFunc, id}}/>
+    });
   }
 
   return (

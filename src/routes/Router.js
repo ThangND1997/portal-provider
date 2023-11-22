@@ -13,7 +13,7 @@ const Buttons = lazy(() => import("../views/ui/Buttons"));
 const Cards = lazy(() => import("../views/ui/Cards"));
 const Grid = lazy(() => import("../views/ui/Grid"));
 const Tables = lazy(() => import("../views/ui/Tables"));
-const Forms = lazy(() => import("../views/ui/Forms"));
+// const Forms = lazy(() => import("../views/ui/Forms"));
 const Breadcrumbs = lazy(() => import("../views/ui/Breadcrumbs"));
 
 /*****Routes******/
@@ -29,10 +29,10 @@ const ThemeRoutes = (modalFunc, toastFunc, popupsFunc) => {
         { path: "/alerts", element: <Alerts /> },
         { path: "/badges", element: <Badges /> },
         { path: "/buttons", element: <Buttons /> },
-        { path: "/products", element: <Cards data={{modalFunc, toastFunc}}/> },
+        { path: "/products", element: <Cards data={{modalFunc, toastFunc, popupsFunc}}/> },
         { path: "/grid", element: <Grid /> },
         { path: "/management", element: <Tables data={{modalFunc, toastFunc, popupsFunc}}/> },
-        { path: "/employee-register", element: <Forms data={{modalFunc, toastFunc}}/> },
+        // { path: "/employee-register", element: <Forms data={{modalFunc, toastFunc}}/> },
         { path: "/breadcrumbs", element: <Breadcrumbs /> },
       ],
     },

@@ -33,7 +33,7 @@ const SalesChart = (props) => {
   return (
     <Card>
       <CardBody>
-        <CardTitle tag="h5">Biểu đồ theo ngày (hourly)</CardTitle>
+        <CardTitle tag="h5">Biểu đồ doanh thu theo giờ (hourly)</CardTitle>
         <CardSubtitle className="text-muted" tag="h6">
           Đơn vị: 1000 VND
         </CardSubtitle>

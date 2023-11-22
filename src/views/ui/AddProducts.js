@@ -22,7 +22,7 @@ const AddProducts = (load) => {
       url: `${HOST_PRIMARY}/betiu-services/products-warehouse/${id}`,
       method: "DELETE",
       headers: {
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhYzdkMTFmMy1iODNiLTQzZDYtOWJkMS04NWY2Njc3ZTNiZmQiLCJyb2xlSWQiOiJhZG1pbiIsImlhdCI6MTY5ODAyODg4MCwiZXhwIjoxNzM0MDI4ODgwfQ.I4C7uDJpx64jucTuRBOaIRVVTrsiGPgiIt6FUJKYr44",
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhYzdkMTFmMy1iODNiLTQzZDYtOWJkMS04NWY2Njc3ZTNiZmQiLCJyb2xlSWQiOiJtYW5hZ2VyIiwiaWF0IjoxNzAwNjM0NTk5LCJleHAiOjE3MzY2MzQ1OTl9.0d4yf1J79SIT-nISpC-ETQWV6Zsuj848c1mSEiGm6YU",
       },
     })
       .then(res => {
@@ -59,7 +59,7 @@ const AddProducts = (load) => {
       params: { 
         categoryId: "6da2b221-19b6-4b11-957c-a6ebf9a4c3e4"
       },
-      headers: {"Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhYzdkMTFmMy1iODNiLTQzZDYtOWJkMS04NWY2Njc3ZTNiZmQiLCJyb2xlSWQiOiJhZG1pbiIsImlhdCI6MTY5ODAyODg4MCwiZXhwIjoxNzM0MDI4ODgwfQ.I4C7uDJpx64jucTuRBOaIRVVTrsiGPgiIt6FUJKYr44"}
+      headers: {"Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhYzdkMTFmMy1iODNiLTQzZDYtOWJkMS04NWY2Njc3ZTNiZmQiLCJyb2xlSWQiOiJtYW5hZ2VyIiwiaWF0IjoxNzAwNjM0NTk5LCJleHAiOjE3MzY2MzQ1OTl9.0d4yf1J79SIT-nISpC-ETQWV6Zsuj848c1mSEiGm6YU"}
     },
     )
     .then(res => {
@@ -74,14 +74,14 @@ const AddProducts = (load) => {
         <CardBody>
           <CardTitle tag="h5">
             Quản lý sản phẩm
-            <Button style={{ marginLeft: 16 }} variant="outlined" color="primary" onClick={() => addProductFunc()}>
-              <PostAddOutlinedIcon />
-              <span style={{ marginLeft: "10px" }}>Thêm mới</span>
-              </Button>
           </CardTitle>
           <CardSubtitle className="mb-2 text-muted" tag="h6">
             Danh sách sản phẩm
           </CardSubtitle>
+          <Button style={{ marginTop: 6, marginBottom: 16 }} variant="contained" color="inherit" onClick={() => addProductFunc()}>
+            <PostAddOutlinedIcon />
+            <span style={{ marginLeft: "10px" }}>Thêm Sản Phẩm</span>
+          </Button>
 
           <Table className="no-wrap mt-3 align-middle" responsive borderless>
             <thead>

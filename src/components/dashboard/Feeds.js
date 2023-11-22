@@ -55,6 +55,7 @@ const FeedData = [
 ];
 
 const Feeds = (props) => {
+  console.log(props);
   if (Object.keys(props.data).length < 1) {
     return (<></>);
   }
@@ -73,16 +74,19 @@ const Feeds = (props) => {
               tag="a"
               className="d-flex align-items-center p-3 border-0"
             >
-              <Button
-                className="rounded-circle me-3"
-                size="sm"
-                color="primary"
-              >
-                <i className="bi bi-hdd"></i>
-              </Button>
-              {feed.title}
+              <img
+                src={feed.picture}
+                // className="rounded-circle"
+                alt="avatar"
+                width="48"
+                height="38"
+                style={{objectFit: "cover", borderRadius: "6px", marginRight: 16}}
+              />
+
+              <span>{feed.title}</span>
+              
               <small className="ms-auto text-muted text-small">
-                {Number(feed.fee + "000").toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}
+                {Number(feed.fee + "000").toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}
               </small>
             </ListGroupItem>
           ))}

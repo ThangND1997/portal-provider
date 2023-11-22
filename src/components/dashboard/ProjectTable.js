@@ -3,8 +3,14 @@ import { useEffect, useState } from "react";
 import { HOST_PRIMARY, TOAST_KEY } from "../../utils/Constant";
 import axios from "axios";
 import Button from '@mui/material/Button';
+import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import Forms from "../../views/ui/Forms";
+
 
 const ProjectTables = (load) => {
+  const modalFunc = load.projectTables.data.modalFunc;
+  const toastFunc = load.projectTables.data.toastFunc;
+  const popupsFunc = load.projectTables.data.popupsFunc;
   const [reloadUsers, setReloadUsers] = useState(false);
   const [users, setUsers] = useState([]);
   useEffect(() => {
@@ -14,7 +20,7 @@ const ProjectTables = (load) => {
       url: `${HOST_PRIMARY}/betiu-services/users`,
       method: "GET",
       headers: {
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhYzdkMTFmMy1iODNiLTQzZDYtOWJkMS04NWY2Njc3ZTNiZmQiLCJyb2xlSWQiOiJhZG1pbiIsImlhdCI6MTY5ODAyODg4MCwiZXhwIjoxNzM0MDI4ODgwfQ.I4C7uDJpx64jucTuRBOaIRVVTrsiGPgiIt6FUJKYr44",
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhYzdkMTFmMy1iODNiLTQzZDYtOWJkMS04NWY2Njc3ZTNiZmQiLCJyb2xlSWQiOiJtYW5hZ2VyIiwiaWF0IjoxNzAwNjM0NTk5LCJleHAiOjE3MzY2MzQ1OTl9.0d4yf1J79SIT-nISpC-ETQWV6Zsuj848c1mSEiGm6YU",
       },
     })
       .then(res => {
@@ -31,7 +37,7 @@ const ProjectTables = (load) => {
       url: `${HOST_PRIMARY}/betiu-services/users/${id}/approve`,
       method: "POST",
       headers: {
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhYzdkMTFmMy1iODNiLTQzZDYtOWJkMS04NWY2Njc3ZTNiZmQiLCJyb2xlSWQiOiJhZG1pbiIsImlhdCI6MTY5ODAyODg4MCwiZXhwIjoxNzM0MDI4ODgwfQ.I4C7uDJpx64jucTuRBOaIRVVTrsiGPgiIt6FUJKYr44",
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhYzdkMTFmMy1iODNiLTQzZDYtOWJkMS04NWY2Njc3ZTNiZmQiLCJyb2xlSWQiOiJtYW5hZ2VyIiwiaWF0IjoxNzAwNjM0NTk5LCJleHAiOjE3MzY2MzQ1OTl9.0d4yf1J79SIT-nISpC-ETQWV6Zsuj848c1mSEiGm6YU",
       },
     })
       .then(res => {
@@ -59,7 +65,7 @@ const ProjectTables = (load) => {
       url: `${HOST_PRIMARY}/betiu-services/users/${id}/reject`,
       method: "POST",
       headers: {
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhYzdkMTFmMy1iODNiLTQzZDYtOWJkMS04NWY2Njc3ZTNiZmQiLCJyb2xlSWQiOiJhZG1pbiIsImlhdCI6MTY5ODAyODg4MCwiZXhwIjoxNzM0MDI4ODgwfQ.I4C7uDJpx64jucTuRBOaIRVVTrsiGPgiIt6FUJKYr44",
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhYzdkMTFmMy1iODNiLTQzZDYtOWJkMS04NWY2Njc3ZTNiZmQiLCJyb2xlSWQiOiJtYW5hZ2VyIiwiaWF0IjoxNzAwNjM0NTk5LCJleHAiOjE3MzY2MzQ1OTl9.0d4yf1J79SIT-nISpC-ETQWV6Zsuj848c1mSEiGm6YU",
       },
     })
       .then(res => {
@@ -82,6 +88,46 @@ const ProjectTables = (load) => {
       })
   }
 
+  const addProductFunc = () => {
+    load.projectTables.data.popupsFunc({
+      isShow: true, 
+      soakData: <Forms forms={{modalFunc, toastFunc, popupsFunc, setReloadUsers}}/>
+    });
+  }
+
+  const editUserFunc = (id) => {
+    console.log(id);
+  }
+
+  const delUserFunc = (id) => {
+    load.projectTables.data.modalFunc(true);
+    axios({
+      url: `${HOST_PRIMARY}/betiu-services/users/${id}`,
+      method: "DELETE",
+      headers: {
+        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhYzdkMTFmMy1iODNiLTQzZDYtOWJkMS04NWY2Njc3ZTNiZmQiLCJyb2xlSWQiOiJtYW5hZ2VyIiwiaWF0IjoxNzAwNjM0NTk5LCJleHAiOjE3MzY2MzQ1OTl9.0d4yf1J79SIT-nISpC-ETQWV6Zsuj848c1mSEiGm6YU",
+      },
+    })
+      .then(res => {
+        setReloadUsers(true);
+        load.projectTables.data.modalFunc(false);
+        load.projectTables.data.toastFunc({
+          isOpen: true,
+          key: TOAST_KEY.SUCCESS,
+        });
+      })
+      .catch((er) => {
+        load.projectTables.data.modalFunc(false);
+        load.projectTables.data.toastFunc({
+          isOpen: true,
+          key: TOAST_KEY.ERROR,
+          customMessage: {
+            value: er.response.data.message
+          }
+        });
+      })
+  }
+
   return (
     <div>
       <Card>
@@ -90,6 +136,10 @@ const ProjectTables = (load) => {
           <CardSubtitle className="mb-2 text-muted" tag="h6">
             Danh sách thành viên
           </CardSubtitle>
+          <Button style={{ marginTop: 6, marginBottom: 16 }} variant="contained" color="inherit" onClick={() => addProductFunc()}>
+            <GroupAddIcon />
+            <span style={{ marginLeft: "10px" }}>Thêm Thành Viên</span>
+          </Button>
 
           <Table className="no-wrap mt-3 align-middle" responsive borderless>
             <thead>
@@ -103,6 +153,8 @@ const ProjectTables = (load) => {
 
                 <th>Trạng thái</th>
 
+                <th></th>
+                <th></th>
                 <th></th>
               </tr>
             </thead>
@@ -126,7 +178,11 @@ const ProjectTables = (load) => {
                   </td>
                   <td>{userInfo.phone}</td>
                   <td>{userInfo.address}</td>
-                  <td>{userInfo.role}</td>
+                  <td>{userInfo.role === "manager" ? (
+                      <span className="p-2 d-inline-block ms-3" style={{ color: "#04c29e" }}>{userInfo.role}</span>
+                  ) : (
+                    <span className="p-2 d-inline-block ms-3">{userInfo.role}</span>
+                  )}</td>
                   <td>
                     {userInfo.status === "active" ? (
                       <span className="p-2 d-inline-block ms-3" style={{ color: "#15803d" }}>active</span>
@@ -137,11 +193,17 @@ const ProjectTables = (load) => {
                     )}
                   </td>
                   <td>
-                    {userInfo.status === "active" && userInfo.role !== "admin" ? (
+                    {userInfo.status === "active" && userInfo.role !== "manager" ? (
                       <Button variant="contained" color="error" onClick={() => archiveUserFunc(userInfo.id)}>Archive</Button>
                     ) : userInfo.status === "pending" || userInfo.status === "archived" ? (
-                      <Button variant="contained" color="success" onClick={() => activeUserFunc(userInfo.id)}>Active</Button>
+                      <Button variant="contained" color="info" onClick={() => activeUserFunc(userInfo.id)}>Active</Button>
                     ) : <span></span>}
+                  </td>
+                  <td>
+                    {userInfo.role !== "manager" ? <Button variant="contained" color="success" onClick={() => editUserFunc(userInfo.id)}>EDIT</Button> : <></>}
+                  </td>
+                  <td>
+                    {userInfo.role !== "manager" ? <Button variant="contained" color="error" onClick={() => delUserFunc(userInfo.id)}>DEL</Button> : <></>}
                   </td>
                 </tr>
               ))}

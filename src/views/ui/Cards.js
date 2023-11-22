@@ -15,7 +15,7 @@ const Cards = (load) => {
       params: { 
         categoryId: "6da2b221-19b6-4b11-957c-a6ebf9a4c3e4"
       },
-      headers: {"Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhYzdkMTFmMy1iODNiLTQzZDYtOWJkMS04NWY2Njc3ZTNiZmQiLCJyb2xlSWQiOiJhZG1pbiIsImlhdCI6MTY5ODAyODg4MCwiZXhwIjoxNzM0MDI4ODgwfQ.I4C7uDJpx64jucTuRBOaIRVVTrsiGPgiIt6FUJKYr44"}
+      headers: {"Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJhYzdkMTFmMy1iODNiLTQzZDYtOWJkMS04NWY2Njc3ZTNiZmQiLCJyb2xlSWQiOiJtYW5hZ2VyIiwiaWF0IjoxNzAwNjM0NTk5LCJleHAiOjE3MzY2MzQ1OTl9.0d4yf1J79SIT-nISpC-ETQWV6Zsuj848c1mSEiGm6YU"}
     },
     )
     .then(res => {
@@ -36,11 +36,13 @@ const Cards = (load) => {
         {data.map((item, index) => (
           <Col sm="6" lg="4" xl="3" key={index}>
             <Blog
+              id={item.id}
               image={item.picture}
               title={item.name}
               subtitle={item.description}
               priceDisplay={item.priceDisplay}
               total={item.total}
+              load={load}
             />
           </Col>
         ))}

@@ -38,11 +38,6 @@ const navigation = [
     href: "/table",
     icon: "bi bi-layout-split",
   },
-  {
-    title: "Đăng kí thành viên",
-    href: "/forms",
-    icon: "bi bi-textarea-resize",
-  },
 ];
 
 const Sidebar = () => {
