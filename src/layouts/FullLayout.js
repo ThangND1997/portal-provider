@@ -3,7 +3,7 @@ import Sidebar from "./Sidebar";
 import Header from "./Header";
 import { Container } from "reactstrap";
 
-const FullLayout = () => {
+const FullLayout = (pops) => {
   return (
     <main>
       <div className="pageWrapper d-lg-flex">
@@ -15,7 +15,7 @@ const FullLayout = () => {
 
         <div className="contentArea">
           {/********header**********/}
-          <Header />
+          <Header data={pops}/>
           {/********Middle Content**********/}
           <Container className="p-4 wrapper" fluid>
             <Outlet />

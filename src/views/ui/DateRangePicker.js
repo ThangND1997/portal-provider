@@ -7,7 +7,6 @@ import * as momentTz from 'moment-timezone';
 
 const DateRangePickerPage = (props) => {
   const [value, setValue] = useState(momentTz().startOf("days"));
-  // props.dateRangePicker([value.toISOString(), value.clone().endOf("days").toISOString()])
   useEffect(() => {
     props.dateRangePicker([value.clone().toISOString(), value.clone().add(23, "hours").toISOString()]);
   }, [value])

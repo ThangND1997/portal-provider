@@ -9,16 +9,18 @@ import {
 } from "reactstrap";
 import Skeleton from '@mui/material/Skeleton';
 import ReleaseProducts from "../../views/ui/ReleaseProducts";
+import { useEffect } from "react";
 
 const Blog = (props) => {
   const modalFunc = props.load.data.modalFunc;
   const toastFunc = props.load.data.toastFunc;
   const popupsFunc = props.load.data.popupsFunc;
-  const id = props.id;
+  const childDataFunc = props.load.data.childDataFunc;
+  const info = {id: props.id, title: props.title, image: props.image};
   const handlePopupItemFunc = () => {
     props.load.data.popupsFunc({
       isShow: true, 
-      soakData: <ReleaseProducts forms={{modalFunc, toastFunc, popupsFunc, id}}/>
+      soakData: <ReleaseProducts forms={{modalFunc, toastFunc, popupsFunc, info, childDataFunc}}/>
     });
   }
 
@@ -35,7 +37,7 @@ const Blog = (props) => {
         </CardSubtitle>
         <CardText style={{ color: '#e13f8f' }} className="mt-3">Giá: {props.priceDisplay ? Number(props.priceDisplay + "000").toLocaleString('it-IT', {style : 'currency', currency : 'VND'}) : "0 VND"}</CardText>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <Button color='info' onClick={handlePopupItemFunc}>Order Now</Button>
+          <Button color='info' onClick={handlePopupItemFunc}>Thanh toán ngay</Button>
           <span>sl: {props.total}</span>
         </div>
       </CardBody>

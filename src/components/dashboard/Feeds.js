@@ -62,9 +62,11 @@ const Feeds = (props) => {
   return (
     <Card>
       <CardBody>
-        <CardTitle tag="h5">Doanh thu theo ngày</CardTitle>
+        <CardTitle tag="h5">{props.currentType === "revenue" ? "Doanh thu" : "Sản lượng"} theo ngày</CardTitle>
         <CardSubtitle className="mb-2 text-muted" tag="h6">
-          Tổng doanh thu: {Number(props.data.totalPriceCharge + "000").toLocaleString('it-IT', {style : 'currency', currency : 'VND'})}
+          Tổng {props.currentType === "revenue" ? "doanh thu" : "sản lượng"}: {props.currentType === "revenue" ? Number(props.data.totalPriceCharge + "000").toLocaleString('it-IT', {style : 'currency', currency : 'VND'}) : props.data.detailPriceCharge.reduce((n, item) => {
+              return n + item.fee
+            }, 0) + " SP"}
         </CardSubtitle>
         <ListGroup flush className="mt-4">
           {props.data.detailPriceCharge.map((feed, index) => (
@@ -86,7 +88,7 @@ const Feeds = (props) => {
               <span>{feed.title}</span>
               
               <small className="ms-auto text-muted text-small">
-                {Number(feed.fee + "000").toLocaleString('it-IT', { style: 'currency', currency: 'VND' })}
+                {props.currentType === "revenue" ? Number(feed.fee + "000").toLocaleString('it-IT', { style: 'currency', currency: 'VND' }) : feed.fee + "SP"}
               </small>
             </ListGroupItem>
           ))}

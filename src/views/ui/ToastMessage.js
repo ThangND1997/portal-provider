@@ -30,7 +30,7 @@ const ToastMessage = (props) => {
   },[props])
   return (
     <Stack sx={{ zIndex: 9999, position: 'fixed', right: 0 }}>
-      <Snackbar sx={{position: 'unset'}} open={isOpen} onClose={handleClose} autoHideDuration={2000} >
+      <Snackbar sx={{position: 'unset'}} open={isOpen} onClose={handleClose} autoHideDuration={1000} >
         <Alert severity={status}>{value}</Alert>
       </Snackbar>
     </Stack>

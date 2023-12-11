@@ -1,5 +1,5 @@
-export const HOST_PRIMARY = "https://service-provider-cguh.onrender.com";
-// export const HOST_PRIMARY = "http://localhost:4000";
+// export const HOST_PRIMARY = "https://service-provider-cguh.onrender.com";
+export const HOST_PRIMARY = "http://localhost:4000";
 
 export const MAPPING_TOAST = {
     0: ["success", "Cập nhật thành công."],

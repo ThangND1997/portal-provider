@@ -15,6 +15,7 @@ const App = () => {
   const isPopups = (pops) => {
     setPops(pops)
   }
+  
   const routing = useRoutes(ThemeRoutes(isLoadFunc, isToastOpenFunc, isPopups));
   const [isLoading, setIsLoading] = useState(false);
   const [open, setOpen] = useState({

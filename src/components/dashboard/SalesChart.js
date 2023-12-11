@@ -1,6 +1,7 @@
 import { Card, CardBody, CardSubtitle, CardTitle } from "reactstrap";
 import Chart from "react-apexcharts";
 import DateRangePickerPage from "../../views/ui/DateRangePicker"
+import SelectItems from "../../views/ui/SelectItem"
 
 const SalesChart = (props) => {
   const chartoptions = {
@@ -33,11 +34,12 @@ const SalesChart = (props) => {
   return (
     <Card>
       <CardBody>
-        <CardTitle tag="h5">Biểu đồ doanh thu theo giờ (hourly)</CardTitle>
+        <CardTitle tag="h5">Biểu đồ {props.currentType === "revenue" ? "doanh thu" : "sản lượng"} theo giờ (hourly)</CardTitle>
         <CardSubtitle className="text-muted" tag="h6">
-          Đơn vị: 1000 VND
+          Đơn vị: {props.currentType === "revenue" ? "1000 VND" : " SP (sản phẩm)"}
         </CardSubtitle>
         <DateRangePickerPage dateRangePicker={props.dateRange}/>
+        <SelectItems reportType={props.reportType}/>
         <Chart
           type="area"
           width="100%"
